@@ -1,7 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { TodoContext } from "../context/TodoContext";
 
-const Form = ({ addNewTodo, input, setInput }) => {
+const Form = () => {
+  const { input, setInput } = useContext(TodoContext);
+
+  const addNewTodo = (e) => {
+    e.preventDefault();
+
+    const newInput = { ...input, id: Date.now() };
+    const newArray = [...todos, newInput];
+
+    setTodos(newArray);
+    // setInput(defaultTodo);
+  };
+  console.log("input", input);
   return (
     <StyledForm onSubmit={addNewTodo}>
       <StyledInput

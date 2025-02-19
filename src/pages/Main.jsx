@@ -2,39 +2,24 @@ import styled from "styled-components";
 import Form from "../components/Form";
 import List from "../components/List";
 import { useState } from "react";
+import { TodoProvider } from "../context/TodoContext";
 
 const MainPage = () => {
-  const defaultTodo = {
-    id: 1,
-    title: "",
-    content: "",
-    isDone: false,
-  };
-  const [input, setInput] = useState(defaultTodo);
-  const [todos, setTodos] = useState([]);
-
-  const addNewTodo = (e) => {
-    e.preventDefault();
-
-    const newInput = { ...input, id: Date.now() };
-    const newArray = [...todos, newInput];
-
-    setTodos(newArray);
-    // setInput(defaultTodo);
-  };
   return (
-    <StContainer>
-      <StHeader>
-        <h1>내일배움캠프 스탠다드반 투두리스트</h1>
-      </StHeader>
-      <StMain>
-        <Form addNewTodo={addNewTodo} input={input} setInput={setInput} />
-        <List todos={todos} setTodos={setTodos} setInput={setInput} />
-      </StMain>
-      <StFooter>
-        <p>Copyright 2025 스파르타 내일배움캠프</p>
-      </StFooter>
-    </StContainer>
+    <TodoProvider>
+      <StContainer>
+        <StHeader>
+          <h1>내일배움캠프 스탠다드반 투두리스트</h1>
+        </StHeader>
+        <StMain>
+          <Form />
+          <List />
+        </StMain>
+        <StFooter>
+          <p>Copyright 2025 스파르타 내일배움캠프</p>
+        </StFooter>
+      </StContainer>
+    </TodoProvider>
   );
 };
 
